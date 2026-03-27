@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Yasko | Personal Website</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --text: #2f343b;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #4f46e5;
+      --shadow: 0 6px 22px rgba(15, 23, 42, 0.06);
+      --radius: 16px;
+      --max-width: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 28px auto 48px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 28px;
+    }
+
+    .sidebar,
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      padding: 26px 22px;
+    }
+
+    .profile-photo {
+      width: 210px;
+      height: 210px;
+      display: block;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #f3f4f6;
+      background: #eef2f7;
+    }
+
+    .name {
+      font-size: 2rem;
+      line-height: 1.15;
+      margin: 0 0 10px;
+    }
+
+    .role,
+    .org {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .role { color: var(--muted); }
+    .org  { margin-top: 4px; }
+
+    .sidebar-links {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .sidebar-links a,
+    .sidebar-links div {
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.98rem;
+    }
+
+    .main {
+      display: grid;
+      gap: 22px;
+    }
+
+    .section-card {
+      padding: 26px 28px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.85rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 12px 0 18px;
+    }
+
+    .section-subtitle {
+      margin: 18px 0 10px;
+      font-size: 1.18rem;
+    }
+
+    details {
+      margin-bottom: 10px;
+      border: 1px solid #ededed;
+      border-radius: 12px;
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .arrow {
+      color: var(--muted);
+      font-size: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+
+    details[open] .arrow { transform: rotate(90deg); }
+
+    .details-body {
+      padding: 0 16px 16px 36px;
+      color: var(--muted);
+    }
+
+    .item-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .item-row {
+      background: #fafafa;
+      border: 1px solid #ededed;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .about p {
+      margin-top: 0;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+
+      .page { padding: 0 16px; }
+      .section-card, .sidebar { padding: 22px 18px; }
+      .profile-photo { width: 170px; height: 170px; }
+      .name { font-size: 1.7rem; }
+      .section-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">Homepage</div>
+      <div class="nav-links">
+        <a href="#about" class="active">About</a>
+        <a href="#research">Research</a>
+        <a href="#people">People</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#publications">Publications</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="page">
+    <aside class="sidebar">
+      <img class="profile-photo" src="profile.jpg" alt="Mohamed Yasko profile photo" />
+      <h1 class="name">Mohamed Yasko</h1>
+      <p class="role">PhD Researcher</p>
+      <p class="org">KU Leuven / EnergyVille</p>
+
+      <div class="sidebar-links">
+        <div><span>📍</span><span>Genk, Belgium</span></div>
+        <a href="mailto:your.email@kuleuven.be"><span>✉️</span><span>your.email@kuleuven.be</span></a>
+        <a href="#"><span>🎓</span><span>Google Scholar</span></a>
+        <a href="#"><span>📄</span><span>CV</span></a>
+        <a href="#"><span>💼</span><span>LinkedIn</span></a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="section-card about" id="about">
+        <h2 class="section-title">👋 About</h2>
+        <hr class="section-divider" />
+        <p>
+          I am a PhD researcher working on EV charging efficiency, smart charging control,
+          and power electronics for energy systems. My work combines experiments,
+          modeling, and machine learning to improve charging performance and system-level efficiency.
+        </p>
+        <p>
+          My research interests include charger efficiency characterization, battery-aware charging control,
+          data-driven optimization, and converter topology design for electric mobility applications.
+        </p>
+      </section>
+
+      <section class="section-card" id="research">
+        <h2 class="section-title">🔬 Research</h2>
+        <hr class="section-divider" />
+
+        <details open>
+          <summary><span class="arrow">▶</span><span>EV Charging Efficiency</span></summary>
+          <div class="details-body">
+            Measurement, modeling, and analysis of EV charging losses under different operating conditions.
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="arrow">▶</span><span>Smart Charging Control</span></summary>
+          <div class="details-body">
+            Battery-aware and efficiency-aware charging control using predictive and optimization-based methods.
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="arrow">▶</span><span>Power Electronics</span></summary>
+          <div class="details-body">
+            Converter topologies, control, and loss reduction for EV chargers and energy conversion systems.
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="arrow">▶</span><span>Machine Learning for Energy Systems</span></summary>
+          <div class="details-body">
+            Neural networks and attention-based models for efficiency prediction and thermal behavior estimation.
+          </div>
+        </details>
+      </section>
+
+      <section class="section-card" id="people">
+        <h2 class="section-title">👥 People</h2>
+        <hr class="section-divider" />
+
+        <h3 class="section-subtitle">Collaborators</h3>
+        <div class="item-list">
+          <div class="item-row">Prof. Johan Driesen <span class="muted">— Supervisor</span></div>
+          <div class="item-row">Prof. Wilmar Martinez <span class="muted">— Supervisor</span></div>
+          <div class="item-row">Research collaborators <span class="muted">— Add your team members here</span></div>
+        </div>
+      </section>
+
+      <section class="section-card" id="teaching">
+        <h2 class="section-title">📚 Teaching</h2>
+        <hr class="section-divider" />
+
+        <details>
+          <summary><span class="arrow">▶</span><span>2025–2026</span></summary>
+          <div class="details-body">Add courses, labs, or supervision activities here.</div>
+        </details>
+
+        <details>
+          <summary><span class="arrow">▶</span><span>2024–2025</span></summary>
+          <div class="details-body">Add courses, labs, or supervision activities here.</div>
+        </details>
+      </section>
+
+      <section class="section-card" id="publications">
+        <h2 class="section-title">📘 Publications</h2>
+        <hr class="section-divider" />
+        <div class="item-list">
+          <div class="item-row">
+            Yasko, M., Tian, F., Martinez, W., and Driesen, J. Add your paper title here.
+          </div>
+          <div class="item-row">
+            Add your recent journal, conference, or dataset publications here.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
